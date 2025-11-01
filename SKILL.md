@@ -443,7 +443,7 @@ This skill includes detailed reference documentation:
    - MCP servers, web apps, and CLI tools
    - Best practices and troubleshooting
 
-7. **[Examples](references/examples.md)**
+7. **[Examples](examples/README.md)**
    - Real-world GitHub configurations
    - Common workflow patterns
    - Anti-patterns to avoid
