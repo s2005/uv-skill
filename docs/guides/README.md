@@ -1,98 +1,31 @@
-# Guides
+# Additional Resources
 
-This directory contains additional documentation and guides for your skill.
+This directory contains supplementary documentation for the UV skill.
 
-## Purpose
+## Claude Code Skills Documentation
 
-Guides provide detailed information beyond the basic SKILL.md file:
+Learn more about using and creating Claude Code skills:
 
-- Reference documentation
-- Advanced usage guides
-- Platform-specific instructions
-- Troubleshooting guides
+- [Claude Code Skills Documentation](https://docs.claude.com/en/docs/claude-code/skills)
+- [Skill Best Practices](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/best-practices)
+- [Skill Creation Guide](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/creating-skills)
 
-## Suggested Guides
+## UV Documentation
 
-### Platform-Specific Guides
+Official UV documentation and resources:
 
-If your skill has platform-specific behavior:
+- [UV Official Documentation](https://docs.astral.sh/uv/)
+- [UV GitHub Repository](https://github.com/astral-sh/uv)
+- [UV Installation Guide](https://docs.astral.sh/uv/getting-started/installation/)
+- [UV Command Reference](https://docs.astral.sh/uv/reference/cli/)
+- [UV Python Project Guide](https://docs.astral.sh/uv/guides/projects/)
 
-- `windows-guide.md` - Windows-specific commands and paths
-- `unix-guide.md` - Unix/Mac-specific commands and paths
-- `linux-guide.md` - Linux-specific instructions
+## MCP Documentation
 
-### Reference Guides
+Model Context Protocol resources for MCP server integration:
 
-- `api-reference.md` - API or command reference
-- `configuration.md` - Configuration options
-- `troubleshooting.md` - Common issues and solutions
-
-### Usage Guides
-
-- `getting-started.md` - Beginner's guide
-- `advanced-usage.md` - Advanced techniques
-- `best-practices.md` - Recommended approaches
-
-## Referencing Guides
-
-Link to guides from your SKILL.md:
-
-```markdown
-## Platform-Specific Instructions
-
-For detailed platform-specific commands:
-- Windows: See `docs/guides/windows-guide.md`
-- Unix/Mac: See `docs/guides/unix-guide.md`
-
-## Advanced Usage
-
-See `docs/guides/advanced-usage.md` for:
-- Advanced configuration
-- Complex workflows
-- Performance optimization
-```
-
-## Best Practices
-
-1. **Keep guides focused** - One topic per guide
-2. **Use clear headings** - Make content scannable
-3. **Provide examples** - Show, don't just tell
-4. **Keep updated** - Maintain as skill evolves
-5. **Cross-link** - Reference related guides
-
-## Adding Guides
-
-When adding a new guide:
-
-1. Create markdown file with clear name
-2. Add table of contents for long guides
-3. Include examples and code snippets
-4. Reference from SKILL.md
-5. Update this README
-6. Test all commands/examples
-
-## Guide Template
-
-```markdown
-# Guide Title
-
-Brief description of what this guide covers.
-
-## Prerequisites
-
-- Requirement 1
-- Requirement 2
-
-## Section 1
-
-Content with examples
-
-## Section 2
-
-More content
-
-## Related Resources
-
-- Link to related guide
-- Link to external resource
-```
+- [MCP Official Documentation](https://modelcontextprotocol.io/)
+- [MCP Specification](https://spec.modelcontextprotocol.io/)
+- [MCP Servers Repository](https://github.com/modelcontextprotocol/servers)
+- [VS Code MCP Configuration](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
+- [Continue IDE MCP Support](https://docs.continue.dev/features/model-context-protocol)

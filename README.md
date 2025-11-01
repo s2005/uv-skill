@@ -1,502 +1,295 @@
-# Claude Code Skill Template
+# UV Skill for Claude Code
 
-A template repository for creating custom Claude Code skills with best practices, documentation structure, and automated release workflows.
+A comprehensive skill for working with UV, the extremely fast Python package and project manager. This skill provides guidance on Python environment management, MCP server integration, and modern Python development workflows.
 
-## Prerequisites
+**Stay Current:** This skill is aware of recent UV changes including Python 3.14 default, free-threaded Python support, and new features in UV 0.9.6+.
 
-**IMPORTANT:** Before using this template, it's highly recommended to use Anthropic's official **skill-creator** skill from the `example-skills` plugin. The skill-creator provides:
+## Overview
 
-- Guided skill creation process with concrete examples
-- Automated skill initialization with `init_skill.py` script
-- Validation and packaging tools
-- Best practices for skill structure and organization
+UV is a Rust-powered Python package manager that replaces pip, pipx, poetry, pyenv, and more - delivering 10-100x faster performance. This skill helps Claude Code users:
 
-### Installing the skill-creator skill
+- Set up and manage Python virtual environments
+- Install and manage Python CLI tools efficiently
+- Run MCP (Model Context Protocol) servers with UVX
+- Configure VS Code and other IDEs for MCP integration
+- Migrate from pip, pipx, or poetry to UV
+- Stay current with latest UV features and version-specific changes
+- Troubleshoot UV-related issues
 
-1. Ensure you have the `example-skills` plugin installed (official Anthropic plugin)
-2. The skill-creator skill is available as `example-skills:skill-creator`
-3. Use it by asking: "Help me create a new skill using the skill-creator"
+## Features
 
-### Why use skill-creator first?
+- **Version-Aware Guidance** - Tracks recent UV changes (0.9.6+) including Python 3.14 default and free-threaded Python
+- **Complete UV Command Reference** - Coverage of uv pip, uv tool, uvx, uv venv, and uv python
+- **Inline Script Metadata (PEP 723)** - Single-file scripts with dependencies in comments
+- **MCP Server Integration** - Detailed patterns for both published packages and local development
+- **Cross-Platform Support** - Instructions for Windows, Linux, and macOS
+- **Real-World Examples** - GitHub Actions, VS Code, Continue IDE configurations
+- **Migration Guides** - Step-by-step migration from pip, pipx, and poetry
+- **Performance Insights** - Understanding UV's 10-100x speed improvements
+- **Troubleshooting** - Common issues and solutions
 
-The skill-creator skill will:
+## Installation
 
-- Help you understand your skill requirements through concrete examples
-- Generate a properly structured skill directory automatically
-- Guide you through the creation process step-by-step
-- Validate and package your skill when ready
+### Install the Skill
 
-This template repository serves as:
+Copy the skill to your Claude Code skills directory:
 
-- A **backup/alternative** approach for manual skill creation
-- A **reference** for skill structure and GitHub automation
-- A **starting point** if you prefer manual setup over guided creation
-
-## Quick Start
-
-### 1. Use This Template
-
-Click the "Use this template" button on GitHub to create a new repository from this template.
-
-Or clone manually:
+**Windows (Git Bash):**
 
 ```bash
-git clone https://github.com/s2005/claude-code-skill-template.git your-skill-name
-cd your-skill-name
+cp -r . "$USERPROFILE/.claude/skills/uv"
 ```
 
-### 2. Customize Your Skill
-
-Replace placeholders in the following files:
-
-#### SKILL.md (Required)
-
-- [ ] Update `name:` in frontmatter
-- [ ] Update `description:` in frontmatter (this is how Claude recognizes your skill!)
-- [ ] Replace all placeholder text with your skill's content
-- [ ] Remove sections you don't need
-- [ ] Add sections specific to your skill
-
-#### README.md (This File)
-
-- [ ] Replace title with your skill name
-- [ ] Update description and features
-- [ ] Update installation instructions
-- [ ] Update usage examples
-- [ ] Update repository URLs
-
-#### VERSION
-
-- [ ] Set initial version (recommend `0.0.1` for development)
-
-#### LICENSE
-
-- [ ] Update year and author name
-- [ ] Or choose a different license if preferred
-
-### 3. Add Your Implementation
-
-Depending on your skill type:
-
-#### For Python-based skills
+**Linux/macOS:**
 
 ```bash
-# Add your Python scripts to scripts/
-scripts/
-  └── your_script.py
+cp -r . ~/.claude/skills/uv
 ```
 
-#### For documentation-based skills
+### Verify Installation
 
-```bash
-# Add guides to docs/guides/
-docs/guides/
-  └── your-guide.md
-```
+Ask Claude Code: "How do I install UV?" or "Help me set up a Python virtual environment with UV"
 
-#### For tool-based skills
+Claude should activate this skill and provide UV-specific guidance.
 
-```bash
-# Add tool configurations or wrappers
-# Update SKILL.md with tool usage
-```
-
-### 4. Update Documentation
-
-#### docs/tasks/release/how-to-release.md
-
-- [ ] Update skill name throughout
-- [ ] Update repository URLs
-- [ ] Adjust release steps if needed
-
-#### docs/tasks/tests/how-to-test-skill.md
-
-- [ ] Create test cases specific to your skill
-- [ ] Update expected outputs
-- [ ] Add skill-specific troubleshooting
-
-### 5. Test Locally
-
-```bash
-# Copy skill to Claude Code skills directory
-# Windows
-cp -r . "$USERPROFILE/.claude/skills/your-skill-name"
-
-# Unix/Mac
-cp -r . ~/.claude/skills/your-skill-name
-
-# Test with Claude Code
-# Ask questions that should trigger your skill
-```
-
-See `docs/tasks/tests/how-to-test-skill.md` for comprehensive testing guide.
-
-### 6. Initialize Git and Push
-
-```bash
-# Initialize git (if not using template)
-git init
-git branch -m main
-
-# Configure git user
-git config --local user.name "your-username"
-git config --local user.email "your-email@users.noreply.github.com"
-
-# Commit initial version
-git add .
-git commit -m "Initial commit: [Your Skill Name]"
-
-# Create GitHub repository
-gh repo create your-skill-name --public --source=. --description="Your skill description"
-
-# Push to GitHub
-git push -u origin main
-```
-
-## Repository Structure
+## Skill Structure
 
 ```text
-claude-code-skill-template/
-├── .github/
-│   └── workflows/
-│       └── release-skill.yml       # Automated release workflow
+uv-skill/
+├── SKILL.md                          # Main skill file with core UV concepts
+├── references/
+│   ├── recent-changes.md             # Latest UV version changes (0.9.6+)
+│   ├── installation-and-setup.md     # Installation and virtual environment setup
+│   ├── tool-management.md            # UV tool install vs uvx comparison
+│   ├── mcp-integration.md            # MCP server execution patterns
+│   ├── python-environment.md         # Python version management
+│   ├── inline-script-metadata.md     # PEP 723 inline dependencies
+│   └── examples.md                   # Real-world configurations
 ├── docs/
-│   ├── guides/                     # Additional documentation
-│   └── tasks/
-│       ├── release/
-│       │   └── how-to-release.md   # Release instructions
-│       └── tests/
-│           └── how-to-test-skill.md # Testing guide
-├── scripts/                        # Executable code (Python/Bash/etc.)
-│   └── example_script.py           # Example script - customize or delete
-├── references/                     # Documentation for context loading
-│   └── example_reference.md        # Example reference - customize or delete
-├── assets/                         # Files used in output (templates, images, etc.)
-│   └── example_asset.txt           # Example asset - customize or delete
-├── examples/                       # Example files/usage (optional)
-├── .gitignore                      # Git ignore file
-├── LICENSE                         # MIT License
-├── README.md                       # This file
-├── SKILL.md                        # Main skill file (REQUIRED)
-├── SETUP.md                        # Detailed setup guide
-└── VERSION                         # Version tracking
+│   └── guides/
+│       └── testing-the-uv-skill.md   # Testing framework with test cases
+├── README.md                         # This file
+├── VERSION                           # Current version
+└── LICENSE                           # MIT License
 ```
 
-**Note:** Following skill-creator best practices:
+## When Claude Uses This Skill
 
-- **scripts/** - For deterministic, reusable code
-- **references/** - For documentation loaded into context
-- **assets/** - For files used in output (not loaded into context)
+Claude will automatically activate this skill when you:
+
+- Ask about UV or UVX
+- Need to install or manage Python packages
+- Want to set up virtual environments
+- Work with MCP servers
+- Ask about Python tool management
+- Need help migrating from pip, pipx, or poetry
+- Troubleshoot UV-related errors
+
+## Quick Start Examples
+
+### Ask Claude
+
+**Version & Recent Changes:**
+
+- "What version of UV should I be using?"
+- "What's new in UV 0.9.6?"
+- "How do I use free-threaded Python with UV?"
+- "What Python version will UV install by default?"
+
+**Virtual Environments:**
+
+- "How do I create a Python virtual environment with UV?"
+- "Help me activate my venv and install packages using UV"
+
+**Tool Management:**
+
+- "Should I use uv tool install or uvx for black?"
+- "How do I install development tools with UV?"
+
+**MCP Servers:**
+
+- "How do I run mcp-server-sqlite with uvx?"
+- "Configure VS Code to use uvx for MCP servers"
+- "How do I run a local MCP server with uvx --from?"
+
+**Migration:**
+
+- "Help me migrate from pip to UV"
+- "Convert my pipx installations to UV tool"
+
+**Troubleshooting:**
+
+- "I'm getting spawn uvx ENOENT error"
+- "UV can't find my package"
 
 ## What's Included
 
-### Core Files
+### Core Concepts (SKILL.md)
 
-- **SKILL.md** - Main skill configuration with YAML frontmatter
-  - Claude reads this to understand when to use your skill
-  - Must have `name` and `description` in frontmatter
-  - Contains instructions, examples, and workflows
+- UV command overview (uv pip, uv tool, uvx, uv venv, uv python)
+- Tool vs UVX decision tree
+- MCP server execution patterns
+- Virtual environment management
+- Common workflows and integration patterns
+- Best practices and anti-patterns
 
-- **VERSION** - Simple version tracking
-  - Used by GitHub Actions for releases
-  - Update when ready to release
+### Reference Documentation
 
-- **.gitignore** - Standard ignores for Python, IDE, OS files
+1. **Recent Changes** - Latest UV version information (0.9.6+), Python 3.14 default, free-threaded Python, new features
+2. **Installation & Setup** - Cross-platform installation, virtual environment setup
+3. **Tool Management** - Persistent vs temporary execution, maintenance workflows
+4. **MCP Integration** - Published packages, local development, IDE configuration
+5. **Python Environment** - Version management, cross-platform paths
+6. **Inline Script Metadata** - PEP 723 dependencies in comments, single-file scripts
+7. **Examples** - Real-world GitHub configurations, workflow patterns
 
-- **LICENSE** - MIT License (customize if needed)
+## Recent Changes Awareness
 
-### Documentation Templates
+This skill stays current with the latest UV developments. Claude Code will be aware of:
 
-- **README.md** - This file, customize for your skill
-- **docs/tasks/release/how-to-release.md** - Complete release guide
-- **docs/tasks/tests/how-to-test-skill.md** - Testing framework
-- **docs/guides/** - Additional guides (optional)
+### UV 0.9.6+ Features
 
-### Automation
+- **Python 3.14 Default** - UV now installs Python 3.14 by default (previously 3.13)
+- **Free-Threaded Python** - Python 3.14+ without GIL for true parallel execution
+- **Build --clear Flag** - Automatic cleanup of old build artifacts with `uv build --clear`
 
-- **.github/workflows/release-skill.yml** - GitHub Actions workflow
-  - Automatically builds skill package on release
-  - Creates zip file for distribution
-  - Validates skill structure
-  - Attaches to GitHub release
+### UV 0.9.7 Features
 
-### Bundled Resources (Following skill-creator Best Practices)
+- **Security Updates** - Improved tar/ZIP archive handling
+- **Windows x86-32 Support** - Better compatibility on Windows systems
 
-- **scripts/** - Executable code (Python/Bash/etc.) for deterministic, reusable operations
-  - Include when the same code is repeatedly rewritten
-  - Scripts can be executed without loading into context
+### Version-Aware Guidance
 
-- **references/** - Documentation loaded into context as needed
-  - Include for schemas, API docs, domain knowledge, policies
-  - Keeps SKILL.md lean while providing detailed information
-  - For files >10k words, include grep patterns in SKILL.md
+Claude Code will:
+- Recommend upgrading if your UV version lacks needed features
+- Provide version-specific instructions
+- Warn about deprecated features
+- Explain breaking changes and migration paths
 
-- **assets/** - Files used in output, not loaded into context
-  - Include templates, images, boilerplate, fonts
-  - These files are copied/modified in the final output
+Ask questions like:
+- "What Python version will UV install by default?"
+- "How do I use free-threaded Python with UV?"
+- "Do I need to upgrade UV for Python 3.14?"
+- "What's new in UV 0.9.6?"
 
-- **examples/** - Example files or usage scenarios (optional)
-- **docs/guides/** - Additional documentation (optional)
+## Key Concepts
 
-## Customization Guide
+### UV Commands
 
-### 1. Skill Name and Description
+| Command | Purpose | Use Case |
+|---------|---------|----------|
+| `uv pip install` | Install packages | In virtual environments |
+| `uv tool install` | Install CLI tools | Daily development tools |
+| `uvx` | Temporary execution | MCP servers, testing |
+| `uv venv` | Create venv | Project isolation |
+| `uv python install` | Install Python | Version management |
 
-The `description` field in SKILL.md frontmatter is crucial:
+### Tool vs UVX Decision
 
-```yaml
----
-name: my-awesome-skill
-description: This skill should be used when the user asks about [X], needs to [Y], or mentions [Z]. Use when queries involve [key terms].
----
-```
+- **Use `uv tool install`** for: black, flake8, mypy, pytest (daily tools)
+- **Use `uvx`** for: MCP servers, one-off executions, testing
 
-**Tips:**
+### MCP Server Patterns
 
-- Be specific about when to use the skill
-- Include trigger words users might say
-- Mention file types, actions, or topics
-- Keep it concise but descriptive
-
-### 2. Adding Bundled Resources
-
-Follow skill-creator best practices for organizing resources:
-
-#### Adding Scripts (`scripts/`)
-
-Use when code is repeatedly rewritten or needs deterministic reliability:
-
-1. Add script to `scripts/` directory
-2. Make it executable: `chmod +x scripts/your_script.py`
-3. Document usage in SKILL.md
-4. Test locally
-
-Example:
-
-```python
-#!/usr/bin/env python3
-"""
-Your script description
-"""
-
-def main():
-    # Your logic here
-    pass
-
-if __name__ == '__main__':
-    main()
-```
-
-#### Adding References (`references/`)
-
-Use for documentation that should be loaded into context:
-
-1. Add markdown file to `references/` directory
-2. Include schemas, API docs, domain knowledge, policies
-3. Reference in SKILL.md with brief description
-4. Keep SKILL.md lean by moving detailed info here
-
-Example:
-
-```markdown
-# Database Schema Reference
-
-## users table
-- id (PRIMARY KEY)
-- username (VARCHAR)
-...
-```
-
-#### Adding Assets (`assets/`)
-
-Use for files used in output (not loaded into context):
-
-1. Add template/image/boilerplate to `assets/` directory
-2. Document in SKILL.md how to use the asset
-3. Claude will copy/modify these in the final output
-
-Example assets:
-
-- Templates: `assets/template.html`
-- Images: `assets/logo.png`
-- Boilerplate: `assets/frontend-template/`
-
-### 3. Platform-Specific Instructions
-
-If your skill needs platform-specific commands (like plugin-manager):
-
-1. Create `docs/guides/windows-guide.md`
-2. Create `docs/guides/unix-guide.md`
-3. Reference them in SKILL.md:
-
-   ```markdown
-   ## Platform-Specific Instructions
-   - Windows: See `docs/guides/windows-guide.md`
-   - Unix/Mac: See `docs/guides/unix-guide.md`
-   ```
-
-### 4. Updating GitHub Actions
-
-Edit `.github/workflows/release-skill.yml`:
-
-- Change `{skill-name}` placeholders to your skill name
-- Update skill structure validation if needed
-- Customize release notes template
-
-## Release Process
-
-When ready to release:
-
-1. Update VERSION file (e.g., `1.0.0`)
-2. Commit and push
-3. Create GitHub release: `gh release create v1.0.0 --generate-notes`
-4. GitHub Actions automatically builds and attaches skill zip
-
-See `docs/tasks/release/how-to-release.md` for detailed instructions.
-
-## Testing
-
-Manual testing framework included in `docs/tasks/tests/how-to-test-skill.md`:
-
-1. Install skill locally
-2. Run test scenarios
-3. Verify activation
-4. Document results
+- **Published packages**: `uvx mcp-server-sqlite --db-path /path/to/db`
+- **Local development**: `uvx --from /path/to/project server.py`
 
 ## Best Practices
 
-Based on Anthropic's skill-creator best practices:
+### DO
 
-### Skill Description
+- Use `python -m venv` for project virtual environments
+- Use `uv tool install` for frequently used development tools
+- Use `uvx` for all MCP server execution
+- Use `--from` flag for local MCP server development
+- Pin versions in production (`package@1.2.3`)
 
-- Be specific about when to use the skill
-- Include trigger words users might say
-- Use third-person form: "This skill should be used when..."
-- Test that Claude activates the skill correctly
+### DON'T
 
-### Skill Content
+- Install packages globally without virtual environments
+- Mix pip and uv tool installations
+- Install MCP servers with `uv tool install`
+- Use `uvx` for daily development tools
+- Use `@latest` in production
 
-- **Writing style:** Use imperative/infinitive form (verb-first instructions) throughout
-  - Good: "Run the script to process files"
-  - Bad: "You should run the script" or "You can run the script"
-- Keep SKILL.md focused and concise
-- Move detailed documentation to `references/` files
-- Use clear, actionable instructions
-- Provide real examples, not hypothetical ones
-- Break complex tasks into steps
+## Performance
 
-### Bundled Resources
+UV delivers exceptional performance:
 
-- **scripts/** - For code that's repeatedly rewritten or needs deterministic behavior
-- **references/** - For documentation that should be loaded into context
-- **assets/** - For files used in output (templates, images, boilerplate)
-- Delete example files you don't need
-- Avoid duplicating content between SKILL.md and reference files
-
-### Testing Practices
-
-- Test incrementally after each change
-- Use real user scenarios
-- Verify skill activates when expected
-- Test on multiple platforms if applicable
-- Use skill-creator's `package_skill.py` for validation
-
-### Documentation
-
-- Keep README clear and practical
-- Provide complete setup instructions
-- Document common errors and solutions
-- Include troubleshooting guide
-- Reference bundled resources clearly
-
-### Version Control
-
-- Use semantic versioning (MAJOR.MINOR.PATCH)
-- Start with 0.0.1 for initial development
-- Release 1.0.0 when stable
-- Document changes in releases
-
-### Progressive Disclosure
-
-- Metadata (name + description) - Always in context (~100 words)
-- SKILL.md body - Loaded when skill triggers (<5k words)
-- Bundled resources - Loaded as needed by Claude
-
-## Examples of Skills
-
-Different types of skills you can create:
-
-### 1. Tool Wrapper Skill
-
-Helps Claude use a specific CLI tool (e.g., jq, docker, kubectl)
-
-### 2. Workflow Skill
-
-Guides Claude through multi-step processes (e.g., testing, deployment)
-
-### 3. Documentation Skill
-
-Provides reference information (e.g., API docs, coding standards)
-
-### 4. File Processing Skill
-
-Handles specific file formats (e.g., CSV processing, markdown linting)
-
-### 5. Integration Skill
-
-Connects to external services (within Claude Code's constraints)
+- **10-100x faster** than pip for package operations
+- **Parallel downloads** and installations
+- **Global cache** with deduplication
+- **Rust-powered** dependency resolution
+- **Sub-second** virtual environment creation
 
 ## Troubleshooting
 
-### Skill Doesn't Activate
+Common issues covered:
 
-1. Check SKILL.md has valid YAML frontmatter
-2. Ensure description field is clear and specific
-3. Verify skill is in correct directory
-4. Try being more explicit: "Use [skill-name] to..."
-5. Restart Claude Code
+- "spawn uvx ENOENT" errors (PATH issues)
+- Package not found (PyPI vs local)
+- Permission errors (cache directory)
+- Version conflicts (Python versions)
 
-### Scripts Don't Execute
+See detailed troubleshooting in reference documentation.
 
-1. Check Python/tool is installed
-2. Verify script has correct permissions
-3. Test script manually first
-4. Check file paths (use forward slashes)
+## Development
 
-### Release Workflow Fails
+### Testing the Skill Locally
 
-1. Check VERSION file exists
-2. Verify SKILL.md structure
-3. Check GitHub Actions logs
-4. Ensure all required files present
+1. Copy skill to Claude skills directory
+2. Restart Claude Code (if needed)
+3. Ask UV-related questions
+4. Verify Claude activates the skill
+5. Check responses match documentation
 
-## Resources
+### Updating the Skill
 
-### Official Anthropic Resources
+1. Edit SKILL.md or reference files
+2. Test changes locally
+3. Update VERSION file
+4. Commit and push changes
 
-- **[skill-creator Skill](https://github.com/anthropics/example-skills)** - Use this first! Official skill creation tool
-- [Claude Code Skills Documentation](https://docs.claude.com/en/docs/claude-code/skills)
-- [How to Create Custom Skills](https://support.claude.com/en/articles/12512198-how-to-create-custom-skills)
-- [Skill Authoring Best Practices](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/best-practices)
-- [Example Skills Repository](https://github.com/anthropics/skills)
+## Version History
 
-### skill-creator Advantages
-
-The skill-creator skill provides:
-
-- `init_skill.py` - Automated skill directory generation
-- `package_skill.py` - Validation and packaging automation
-- Guided workflow from requirements to deployment
-- Built-in best practices enforcement
+- **0.1.0** - Initial release
+  - Complete UV command reference
+  - Version-aware guidance for UV 0.9.6+ features
+  - Python 3.14 default version documentation
+  - Free-threaded Python support (PEP 703)
+  - New `uv build --clear` flag documentation
+  - Security updates awareness (tar/ZIP handling)
+  - MCP server integration patterns
+  - Cross-platform installation guides
+  - Migration guides from pip/pipx/poetry
+  - Real-world examples and configurations
+  - Enhanced testing guide with version-specific test cases
+  - Comprehensive version compatibility matrix
 
 ## Contributing
 
-If you have improvements to this template:
+Contributions welcome! Areas for improvement:
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+- Additional real-world examples
+- More troubleshooting scenarios
+- Integration patterns for other IDEs
+- Performance benchmarks
+- Platform-specific optimizations
+
+## Resources
+
+### Official Documentation
+
+- [UV Official Docs](https://docs.astral.sh/uv/)
+- [UV GitHub Repository](https://github.com/astral-sh/uv)
+- [MCP Official Documentation](https://modelcontextprotocol.io/)
+- [MCP Servers Repository](https://github.com/modelcontextprotocol/servers)
+- [VS Code MCP Support](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
+
+### Claude Code
+
+- [Claude Code Skills Documentation](https://docs.claude.com/en/docs/claude-code/skills)
+- [Skill Best Practices](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/best-practices)
 
 ## License
 
@@ -504,15 +297,18 @@ MIT License - See LICENSE file
 
 ## Support
 
-For issues with this template:
+For issues or questions:
 
-- [GitHub Issues](https://github.com/s2005/claude-code-skill-template/issues)
-- [GitHub Discussions](https://github.com/s2005/claude-code-skill-template/discussions)
+- Check the reference documentation in `references/`
+- Ask Claude Code using this skill
+- Review troubleshooting sections
+- Consult official UV documentation
 
 ## Acknowledgments
 
-This template is based on best practices from:
+This skill is based on:
 
-- Claude Code official documentation
-- Community skill examples
-- Real-world skill development experience
+- Official UV documentation and community practices
+- Real-world MCP server integration patterns
+- Claude Code skill best practices
+- Community feedback and testing

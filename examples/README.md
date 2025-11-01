@@ -1,76 +1,118 @@
-# Examples
+# UV Real-World Examples
 
-This directory contains example files and usage scenarios for your skill.
+## Overview
 
-## Purpose
+This directory contains real-world examples, common patterns, and anti-patterns for UV usage across different scenarios.
 
-Examples help users understand how to use your skill effectively. Include:
+## Example Categories
 
-- Sample input files
-- Sample configuration files
-- Example workflows
-- Expected outputs
+### [Inline Script Metadata](inline-scripts.md)
 
-## Structure
+PEP 723 inline script metadata examples with UV. Learn how to create self-contained Python scripts with embedded dependencies.
 
-Organize examples by use case:
+**Topics:**
 
-```text
-examples/
-├── README.md           # This file
-├── basic/              # Basic usage examples
-│   ├── input.txt
-│   └── expected-output.txt
-├── advanced/           # Advanced usage examples
-│   ├── config.json
-│   └── workflow.md
-└── error-cases/        # Error handling examples
-    └── invalid-input.txt
-```
+- Basic inline dependencies
+- Python version requirements
+- MCP server with inline dependencies
+- Data processing scripts
+- When to use inline metadata
 
-## Usage
+### [MCP Server Examples](mcp-servers.md)
 
-Reference these examples in your SKILL.md:
+Complete MCP server configuration examples for various platforms and use cases.
 
-```markdown
-## Examples
+**Topics:**
 
-See `examples/` directory for sample files:
+- Published MCP servers (official, AWS, etc.)
+- VS Code and Continue IDE configurations
+- Local development setup
+- Multi-configuration development
 
-**Basic Usage:**
-```bash
-# Run with basic example
-python scripts/your_script.py --input examples/basic/input.txt
-```
+### [Development Workflows](development-workflows.md)
 
-**Advanced Usage:**
+Complete development tool setup and daily workflow patterns.
 
-```bash
-# Run with advanced config
-python scripts/your_script.py --config examples/advanced/config.json
-```
+**Topics:**
 
-## Best Practices
+- Python development environment setup
+- Project-specific script execution
+- Multi-version testing workflows
 
-1. **Keep examples simple** - Focus on one concept per example
-2. **Provide expected output** - Show what users should expect
-3. **Explain edge cases** - Include examples of error scenarios
-4. **Keep files small** - Use minimal data to demonstrate concepts
-5. **Document clearly** - Add comments or README files
+### [Virtual Environment Workflows](virtual-environments.md)
 
-## Adding Examples
+Virtual environment management patterns and best practices.
 
-When adding new examples:
+**Topics:**
 
-1. Create appropriately named files
-2. Add clear comments/documentation
-3. Reference in SKILL.md
-4. Test to ensure they work
-5. Update this README
+- Basic project setup
+- Existing project migration
+- Multi-environment projects
 
-## Tips
+### [CI/CD Examples](ci-cd.md)
 
-- Use realistic data (but sanitize sensitive information)
-- Include both success and failure cases
-- Show common patterns users might encounter
-- Provide copy-paste-ready commands
+Continuous integration and deployment configurations.
+
+**Topics:**
+
+- GitHub Actions workflows
+- GitLab CI pipelines
+
+### [Migration Examples](migrations.md)
+
+Migration guides from other Python tools to UV.
+
+**Topics:**
+
+- From pip to UV
+- From pipx to UV tool
+- From poetry to UV
+
+### [Common Patterns](common-patterns.md)
+
+Frequently used patterns and configurations.
+
+**Topics:**
+
+- Development tool suite setup
+- Pre-commit integration
+- Shell configuration
+
+### [Anti-Patterns](anti-patterns.md)
+
+Common mistakes to avoid when using UV.
+
+**Topics:**
+
+- Global pip installs
+- Installing MCP servers with uv tool
+- Using uvx for daily tools
+- Mixed tool management
+- Forgetting virtual environments
+
+### [Complete Workflow](complete-workflow.md)
+
+End-to-end example of setting up a new Python project with UV.
+
+**Topics:**
+
+- Full project initialization
+- Git setup
+- Dependency management
+- Testing and formatting
+- Documentation
+
+## How to Use These Examples
+
+1. **Browse by topic** - Use the category links above to find relevant examples
+2. **Copy and adapt** - All examples are designed to be copied and modified for your needs
+3. **Follow patterns** - Use the "DO" examples and avoid the "DON'T" anti-patterns
+4. **Refer to related docs** - Each example file links to relevant reference documentation
+
+## Related Documentation
+
+- [Installation and Setup](../references/installation-and-setup.md)
+- [Tool Management](../references/tool-management.md)
+- [Python Environment Management](../references/python-environment.md)
+- [Inline Script Metadata](../references/inline-script-metadata.md)
+- [MCP Integration](../references/mcp-integration.md)
