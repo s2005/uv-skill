@@ -161,12 +161,14 @@ This skill stays current with the latest UV developments. Claude Code will be aw
 ### Version-Aware Guidance
 
 Claude Code will:
+
 - Recommend upgrading if your UV version lacks needed features
 - Provide version-specific instructions
 - Warn about deprecated features
 - Explain breaking changes and migration paths
 
 Ask questions like:
+
 - "What Python version will UV install by default?"
 - "How do I use free-threaded Python with UV?"
 - "Do I need to upgrade UV for Python 3.14?"
